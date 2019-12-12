@@ -1,68 +1,69 @@
 package model;
 
+import java.util.HashMap;
+
 public class Board extends Bucket{
-	protected String bucketState;//filled or not filled
-	protected String bucketId;//id of the bucket
-	
-	public Board() {
-		initialize();
+	public static String playerTwoScore = "";//p2 score tracker
+	public static String playerOneScore = "";//p1 score tracker	
+	public static String topRowOutput = ("| ");//Player 2 output
+	public static String botRowOutput = ("| ");//Player 1 output
+	public static HashMap<String, Integer> gameBoard = new HashMap<String, Integer>();//track game board state
+	/*
+	 * check if top row or bottom row is empty
+	 * */
+	public static boolean isRowEmpty() {
+		boolean status = true;
+		int topRow = 0;
+		int bottomRow = 0;
+		for (int i = 0; i < 6; i++) {			
+			topRow += (Integer.valueOf(gameBoard.get(String.valueOf(i+1))));				
+		}
+		for (int i = 7; i < 13; i++) {			
+			bottomRow += (Integer.valueOf(gameBoard.get(String.valueOf(i+1))));				
+		}
+		if (bottomRow > 0 || topRow > 0) {
+			status = false;
+		}
+		return status;
 	}
-
-	public String getBucketState() {
-		return bucketState;
-	}
-
-	public void setBucketState(String bucketState) {
-		this.bucketState = bucketState;
-	}
-
-	public String getBucketId() {
-		return bucketId;
-	}
-
-	public void setBucketId(String bucketId) {
-		this.bucketId = bucketId;
-	}
-	
-	public void initialize() {
-		Bucket a1 = null;
-		Bucket a2 = null;
-		Bucket a3 = null;
-		Bucket a4 = null;
-		Bucket a5 = null;
-		Bucket a6 = null;
-		Bucket b1 = null;
-		Bucket b2 = null;
-		Bucket b3 = null;
-		Bucket b4 = null;
-		Bucket b5 = null;
-		Bucket b6 = null;
+	/*
+	 * Print the current state of the board with player scores
+	 * */
+	public static void printState() {
+		System.out.println(topRowOutput);
+		System.out.println(botRowOutput);
 		
-		a1.setBucketNumber("1");
-		a2.setBucketNumber("3");
-		a3.setBucketNumber("5");
-		a4.setBucketNumber("7");
-		a5.setBucketNumber("9");
-		a6.setBucketNumber("11");
-		b1.setBucketNumber("2");
-		b2.setBucketNumber("4");
-		b3.setBucketNumber("6");
-		b4.setBucketNumber("8");
-		b5.setBucketNumber("10");
-		b6.setBucketNumber("12");
+		playerOneScore += "Player One Score: " + playerOneScore; 
+		playerTwoScore += "Player Two Score: " + playerTwoScore;
 		
-		a1.setBucketValue("4");
-		a2.setBucketValue("4");
-		a3.setBucketValue("4");
-		a4.setBucketValue("4");
-		a5.setBucketValue("4");
-		a6.setBucketValue("4");
-		b1.setBucketValue("4");
-		b2.setBucketValue("4");
-		b3.setBucketValue("4");
-		b4.setBucketValue("4");
-		b5.setBucketValue("4");
-		b6.setBucketValue("4");
+		System.out.println(playerOneScore);
+		System.out.println(playerTwoScore);
+	}
+	/*
+	 * Initialize board with default bucket values
+	 * */
+	public static void initializeBoard() {
+		int cnt = 0;//counter to initialize buckets		
+		/*Fill out game board*/
+		do {			
+			gameBoard.put(String.valueOf(cnt), 4);
+			cnt++;
+		} while (cnt < 14);
+		//Print output
+		
+		for (int i = 0; i < 13; i++) {
+			if (i == 6 || i ==13) {//scoring bins
+				
+			} else {
+				if (i % 2 == 0) {//even, player 1
+					botRowOutput += (gameBoard.get(String.valueOf(i+1)));
+					botRowOutput += (" | ");	
+				} else {//odd, player 2
+					topRowOutput += (gameBoard.get(String.valueOf(i+1)));
+					topRowOutput += (" | ");					
+				}	
+			}			
+		}
 		
 	}
 }
