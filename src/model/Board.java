@@ -30,9 +30,22 @@ public class Board extends Bucket{
 	 * Print the current state of the board with player scores
 	 * */
 	public static void printState() {
+		
+		for (int i = 0; i < 13; i++) {
+			if (i == 6 || i ==13) {//scoring bins
+				
+			} else {
+				if (i % 2 == 0) {//even, player 1
+					botRowOutput += (gameBoard.get(String.valueOf(i+1)));
+					botRowOutput += (" | ");	
+				} else {//odd, player 2
+					topRowOutput += (gameBoard.get(String.valueOf(i+1)));
+					topRowOutput += (" | ");					
+				}	
+			}			
+		}
 		System.out.println(topRowOutput);
 		System.out.println(botRowOutput);
-		
 		playerOneScore += "Player One Score: " + playerOneScore; 
 		playerTwoScore += "Player Two Score: " + playerTwoScore;
 		
