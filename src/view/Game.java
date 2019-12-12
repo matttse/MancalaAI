@@ -25,10 +25,42 @@ public class Game {
 	 */
 	public static void main(String[] args) {
 		initializeBoard();
+		
 		//while game board top row or bottom row is not empty
-			//make move
-		printState();
+		while (isRowEmpty() == false) {
+			//while player 1 move last stone in pit
+			//player 1 move
+			
+			//while player 2 move last stone in pit
+			//player 2 move
+			
+			
+			printState();
+		}
+
 				
+	}
+	
+	
+	
+	
+	/*
+	 * check if top row or bottom row is empty
+	 * */
+	public static boolean isRowEmpty() {
+		boolean status = true;
+		int topRow = 0;
+		int bottomRow = 0;
+		for (int i = 0; i < 6; i++) {			
+			topRow += (Integer.valueOf(gameBoard.get(String.valueOf(i+1))));				
+		}
+		for (int i = 7; i < 13; i++) {			
+			bottomRow += (Integer.valueOf(gameBoard.get(String.valueOf(i+1))));				
+		}
+		if (bottomRow > 0 || topRow > 0) {
+			status = false;
+		}
+		return status;
 	}
 	/*
 	 * Print the current state of the board with player scores
@@ -47,28 +79,28 @@ public class Game {
 	 * Initialize board with default bucket values
 	 * */
 	public static void initializeBoard() {
-		int cnt = 1;//counter to initialize buckets		
+		int cnt = 0;//counter to initialize buckets		
 		/*Fill out game board*/
 		do {			
-			gameBoard.put("a".concat(String.valueOf(cnt)), "4");
+			gameBoard.put(String.valueOf(cnt), "4");
 			cnt++;
-		} while (cnt <= 6);
-		cnt = 1;//reset initializer
-		do {			
-			gameBoard.put("b".concat(String.valueOf(cnt)), "4");
-			cnt++;
-		} while (cnt <= 6);
+		} while (cnt < 14);
 		//Print output
 		
-		for (int i = 0; i < 6; i++) {			
-			topRowOutput += (gameBoard.get("a".concat(String.valueOf(i+1))));
-			topRowOutput += (" | ");			
+		for (int i = 0; i < 13; i++) {
+			if (i == 6 || i ==13) {//scoring bins
+				
+			} else {
+				if (i % 2 == 0) {//even
+					botRowOutput += (gameBoard.get(String.valueOf(i+1)));
+					botRowOutput += (" | ");	
+				} else {//odd
+					topRowOutput += (gameBoard.get(String.valueOf(i+1)));
+					topRowOutput += (" | ");					
+				}	
+			}			
 		}
 		
-		for (int i = 0; i <6; i++) {				
-			botRowOutput += (gameBoard.get("b".concat(String.valueOf(i+1))));
-			botRowOutput += (" | ");		
-		}
 	}
 
 	
