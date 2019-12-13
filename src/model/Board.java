@@ -37,13 +37,14 @@ public class Board extends Bucket{
 			} else {
 				if (i % 2 == 0) {//even, player 1
 					botRowOutput += (gameBoard.get(String.valueOf(i+1)));
-					botRowOutput += (" | ");	
+					botRowOutput += (" | ");
 				} else {//odd, player 2
 					topRowOutput += (gameBoard.get(String.valueOf(i+1)));
 					topRowOutput += (" | ");					
 				}	
 			}			
 		}
+
 		System.out.println(topRowOutput);
 		System.out.println(botRowOutput);
 		playerOneScore += "Player One Score: " + playerOneScore; 
@@ -64,19 +65,6 @@ public class Board extends Bucket{
 		} while (cnt < 14);
 		//Print output
 		
-		for (int i = 0; i < 13; i++) {
-			if (i == 6 || i ==13) {//scoring bins
-				
-			} else {
-				if (i % 2 == 0) {//even, player 1
-					botRowOutput += (gameBoard.get(String.valueOf(i+1)));
-					botRowOutput += (" | ");	
-				} else {//odd, player 2
-					topRowOutput += (gameBoard.get(String.valueOf(i+1)));
-					topRowOutput += (" | ");					
-				}	
-			}			
-		}
 		
 	}
 }
